@@ -18,7 +18,7 @@ class ColumnsController < ApplicationController
     @column = Column.new(column_params)
 
     if @column.save
-      render json: @column, status: :created, location: @column
+      render json: @column, include: :tasks, status: :created, location: @column
     else
       render json: @column.errors, status: :unprocessable_entity
     end
