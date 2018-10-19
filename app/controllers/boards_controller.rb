@@ -35,7 +35,7 @@ class BoardsController < ApplicationController
 
   # DELETE /boards/1
   def destroy
-    @board.destroy
+    Board.destroy(params[:id])
   end
 
   private
