@@ -26,6 +26,10 @@ class ColumnsController < ApplicationController
 
   # PATCH/PUT /columns/1
   def update
+    tasks_params.each do |task|
+      Task.find(task[:id]).update(task)
+    end
+
     if @column.update(column_params)
       render json: @column
     else
@@ -44,8 +48,19 @@ class ColumnsController < ApplicationController
       @column = Column.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    def tasks_params
+      params.fetch(:tasks).map do |p|
+        p.permit(
+          :id,
+          :column_id,
+          :position,
+          :name,
+          :description
+        )
+      end
+    end
+
     def column_params
-      params.fetch(:column, {}).permit(:name, :board_id, :tasks => [] )
+      params.fetch(:column, {}).permit(:name, :board_id)
     end
 end
