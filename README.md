@@ -1,3 +1,5 @@
+# boards-api
+
 This is the API half of a simple Trello clone, built with Rails 5.
 
 This project was built using ruby 2.5.1p57
